@@ -1,0 +1,1 @@
+package uz.salimovdeveloper.musicplayer.adaptersclass RvAdapter {}
