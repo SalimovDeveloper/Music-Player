@@ -1,0 +1,1 @@
+package uz.salimovdeveloper.musicplayer.utilsimport android.media.MediaPlayerobject MyData {    var mediaPlayer:MediaPlayer?=null}
