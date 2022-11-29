@@ -1,15 +1,30 @@
 package uz.salimovdeveloper.musicplayer.fragments
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.DialogInterface
+import android.content.pm.PackageManager
+import android.database.Cursor
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import uz.salimovdeveloper.musicplayer.R
 import uz.salimovdeveloper.musicplayer.adapters.RvAdapter
 import uz.salimovdeveloper.musicplayer.databinding.FragmentListBinding
 import uz.salimovdeveloper.musicplayer.models.Music
+import uz.salimovdeveloper.musicplayer.models.MyData
 
 class ListFragment : Fragment(), RvAdapter.RvClick {
     private lateinit var binding: FragmentListBinding
@@ -46,7 +61,7 @@ class ListFragment : Fragment(), RvAdapter.RvClick {
 
     private fun getPausePlay() {
         if (MyData.path != null && MyData.path!!.isPlaying) {
-            binding.playPauseImage.setImageResource(R.drawable.pause)
+            binding..setImageResource(R.drawable.ic_pause)
             binding.playerSongName.text = musicList[MyData.index].title
             binding.playerSongAuthor.text = musicList[MyData.index].author
         }
@@ -103,12 +118,8 @@ class ListFragment : Fragment(), RvAdapter.RvClick {
     private fun openPlayer() {
         binding.player.setOnClickListener {
             if (MyData.path != null) {
-                val navOption = NavOptions.Builder()
-                navOption.setEnterAnim(R.anim.open_player_animation)
-                navOption.setPopEnterAnim(R.anim.open_player_pop_animation)
-                navOption.setExitAnim(R.anim.exit_player_animation)
-                navOption.setPopExitAnim(R.anim.exit_player_pop_animation)
-                findNavController().navigate(R.id.playMusicFragment, bundleOf(), navOption.build())
+
+                findNavController().navigate(R.id.musicFragment, bundleOf())
                 MyData.index = index
             }
         }
@@ -264,8 +275,8 @@ class ListFragment : Fragment(), RvAdapter.RvClick {
             if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 musicList.addAll(requireContext().getAllAudio())
                 MyData.musicList.addAll(requireContext().getAllAudio())
-                myRvAdapter.list = musicList
-                myRvAdapter.notifyDataSetChanged()
+                rvAdapter.list = musicList
+                rvAdapter.notifyDataSetChanged()
             }
         }
     }

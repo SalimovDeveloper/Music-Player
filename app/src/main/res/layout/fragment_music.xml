@@ -142,6 +142,7 @@
             />
 
         <ImageView
+            android:id="@+id/back_music"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -150,6 +151,7 @@
             />
 
         <ImageView
+            android:id="@+id/play_music"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -157,6 +159,7 @@
             android:src="@drawable/start_icon" />
 
         <ImageView
+            android:id="@+id/next_music"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -165,6 +168,7 @@
             />
 
         <ImageView
+            android:id="@+id/list_music"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
